@@ -23,4 +23,3 @@ router.post("/delete-user", userController.handleDeleteUser);
 
 export { router };
 
-console.log("123")
