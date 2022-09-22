@@ -1,23 +1,19 @@
 import { Request, Response } from "express";
-import { CreateUserService } from "../services/CreateUserService";
-import { DeleteUserService } from "../services/DeleteUserService";
-import { GetUserDataService } from "../services/GetUserDataService";
-import { ListUsersService } from "../services/ListUsersService";
-import { SearchUserService } from "../services/SearchUserService";
-import { UpdateUserService } from "../services/UpdateUserService";
+import { UserService } from "../services/UserService"
+
 class UserController{
     async handleCreateUser(request: Request, response: Response) {
-        const { username, email, telefone, cidade, estado } = request.body;
+        const { username, email, telefono, provincia, ciudad } = request.body;
     
-        const createUserService = new CreateUserService();
+        const createUserService = new UserService();
     
         try {
           await createUserService.create({
             username,
             email,
-            telefone,
-            cidade,
-            estado
+            telefono,
+            provincia,
+            ciudad
           }).then(() => {
             response.render("message", {
               message: "Usuario creado con éxito."
@@ -33,7 +29,7 @@ class UserController{
     async handleDeleteUser(request: Request, response: Response) {
         const { id } = request.body;
     
-        const deleteUserService = new DeleteUserService();
+        const deleteUserService = new UserService();
     
         try {
           await deleteUserService.delete(id).then(() => {
@@ -51,7 +47,7 @@ class UserController{
       let { id } = request.query;
       id = id.toString();
   
-      const getUserDataService = new GetUserDataService();
+      const getUserDataService = new UserService();
   
       const user = await getUserDataService.getData(id);
   
@@ -60,7 +56,7 @@ class UserController{
       });
     }
     async handleListUsers(request: Request, response: Response) {
-      const listUsersService = new ListUsersService();
+      const listUsersService = new UserService();
   
       const users = await listUsersService.list();
   
@@ -72,7 +68,7 @@ class UserController{
       let { search } = request.query;
       search = search.toString();
   
-      const searchUserService = new SearchUserService();
+      const searchUserService = new UserService();
   
       try {
         const users = await searchUserService.search(search);
@@ -87,12 +83,12 @@ class UserController{
       }
     }
     async handleUpdateUser(request: Request, response: Response) {
-      const { id, username, email, telefone, cidade, estado } = request.body;
+      const { id, username, email, telefono, provincia, ciudad } = request.body;
   
-      const updateUserService = new UpdateUserService();
+      const updateUserService = new UserService();
   
       try {
-        await updateUserService.update({ id, username, email, telefone, cidade, estado }).then(() => {
+        await updateUserService.update({ id, username, email, telefono, provincia, ciudad }).then(() => {
           response.render("message", {
             message: "Usuario creado con éxito."
           });

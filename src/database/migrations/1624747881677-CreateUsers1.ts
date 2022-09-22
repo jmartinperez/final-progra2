@@ -21,15 +21,15 @@ export class CreateUsers1624747881677 implements MigrationInterface {
                         type: "varchar"
                     },
                     {
-                        name: "telefone",
+                        name: "telefono",
                         type: "varchar"
                     },
                     {
-                        name: "cidade",
+                        name: "provincia",
                         type: "varchar"
                     },
                     {
-                        name: "estado",
+                        name: "ciudad",
                         type: "varchar",
                         length: "2"
                     },
