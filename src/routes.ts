@@ -1,25 +1,30 @@
-import { Router } from "express";
+import { request, response, Router } from "express";
 import { UserController } from "./controllers/UserController";
+import { ProductController } from "./controllers/ProductController";
 
-const router = Router();
 
-const userController= new UserController();
+const productRouter = Router();
 
-router.get("/", userController.handleListUsers);
+const productController = new ProductController();
 
-router.get("/add", (request, response) => {
-  response.render("add");
+productRouter.get("/", (request, response) => {
+  response.redirect("./home");
 });
 
-router.post("/add-user", userController.handleCreateUser);
+productRouter.get("/home", (request, response) => {
+  response.render("home")
+})
 
-router.get("/search", userController.handleSearchUser);
+productRouter.get("/products",productController.handleListProducts);
 
-router.get("/edit", userController.handleGetUserData);
+productRouter.get("/addProduct", (request, response) => {
+    response.render("products/addproduct");
+  });
+productRouter.post("/add-product", productController.handleCreateProduct);
+productRouter.get("/searchProduct", productController.handleSearchProduct);
+productRouter.get("/editProduct", productController.handleGetProductData)
+productRouter.post("/edit-product", productController.handleUpdateProduct);
+productRouter.post("/delete-product", productController.handleDeleteProduct);
 
-router.post("/edit-user", userController.handleUpdateUser);
-
-router.post("/delete-user", userController.handleDeleteUser);
-
-export { router };
+export { productRouter };
 

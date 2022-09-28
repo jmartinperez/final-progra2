@@ -15,12 +15,12 @@ class UserController{
             provincia,
             ciudad
           }).then(() => {
-            response.render("message", {
+            response.render("user/message", {
               message: "Usuario creado con éxito."
             });
           });
         } catch (err) {
-          response.render("message", {
+          response.render("user/message", {
             message: `Error al crear usuario: ${err.message}`
           });
         }
@@ -33,12 +33,12 @@ class UserController{
     
         try {
           await deleteUserService.delete(id).then(() => {
-            response.render("message", {
-              message: "Usuario creado con éxito."
+            response.render("user/message", {
+              message: "Usuario eliminado con éxito."
             });
           });
         } catch (err) {
-          response.render("message", {
+          response.render("user/message", {
             message: `Error al crear usuario: ${err.message}`
           });
         }
@@ -51,7 +51,7 @@ class UserController{
   
       const user = await getUserDataService.getData(id);
   
-      return response.render("edit", {
+      return response.render("user/edit", {
         user: user
       });
     }
@@ -60,7 +60,7 @@ class UserController{
   
       const users = await listUsersService.list();
   
-      return response.render("index", {
+      return response.render("user/index", {
         users: users
       });
     }
@@ -72,12 +72,12 @@ class UserController{
   
       try {
         const users = await searchUserService.search(search);
-        response.render("search", {
+        response.render("user/search", {
           users: users,
           search: search
         });
       } catch (err) {
-        response.render("message", {
+        response.render("user/message", {
           message: `Error al buscar usuario: ${err.message}`
         });
       }
@@ -89,12 +89,12 @@ class UserController{
   
       try {
         await updateUserService.update({ id, username, email, telefono, provincia, ciudad }).then(() => {
-          response.render("message", {
+          response.render("user/message", {
             message: "Usuario creado con éxito."
           });
         });
       } catch (err) {
-        response.render("message", {
+        response.render("user/message", {
           message: `Error al crear usuario: ${err.message}`
         });
       }

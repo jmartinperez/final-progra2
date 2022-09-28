@@ -2,13 +2,15 @@ import "reflect-metadata";
 import "express-async-errors";
 import express, { Request, Response, NextFunction } from "express";
 import path from "path";
-import { router } from "./routes";
+import { productRouter } from "./routes";
+import { userRoutes } from "./routes/userRoutes";
 import "./database";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(router);
+app.use(productRouter);
+app.use(userRoutes);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof Error) {
