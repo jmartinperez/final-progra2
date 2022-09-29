@@ -17,28 +17,17 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand" href="./home"><img src="/img/icon.png" alt="Node.js icon" class="nav-icon"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="./home">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/addProduct">Agregar Productos</a>
-              <a class="nav-link active" aria-current="page" href="./home">home</a>
-            </li>
-          </ul>
-          <form class="d-flex" action="./searchproduct.ejs" method="GET">
-            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="search">
-            <button class="btn secondary-btn" type="submit">Buscar producto</button>
-          </form>
-        </div>
+        <ul class="nav navbar-nav me-auto mb-2 mb-lg-0"">
+          <li class="nav-item"><a class="nav-link" href="./home">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="/addProduct">Agregar Producto</a></li>
+        </ul>
+        <form class="d-flex" action="./searchproduct" method="GET">
+            <input class="form-control me-2" type="search" placeholder="Buscar producto" aria-label="Buscar" name="search">
+            <button class="btn secondary-btn" type="submit">Buscar</button>
+        </form>
       </div>
     </nav>
     <br>
@@ -49,7 +38,7 @@
       <br>
       <br>
       <br>
-      <table class="table table-hover table-dark">
+      <table class="table table-hover table-dark mt-100px">
         <thead>
           <th scope="col">nombre</th>
           <th scope="col">marca</th>

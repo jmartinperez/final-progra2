@@ -11,3 +11,6 @@ CRUD made with Node.js, Express, TypeScript, TypeORM, EJS &amp; SQLite.
 - 
 - Run `yarn dev` to start the server.
 - The CRUD will be avaiable at `http://localhost:3000`.
+
+
+preguntar como condicionar datos duplicados en actualizacion de registros

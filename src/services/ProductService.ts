@@ -20,7 +20,7 @@ class ProductService {
 
     const productsRepository = getCustomRepository(ProductsRepository);
 
-    const productnameAlreadyExists = await productsRepository.findOne({ nombre });
+    const productnameAlreadyExists = await productsRepository.findOne({ nombre, marca, precio });
 
     if (productnameAlreadyExists) {
       throw new Error("El producto ya ha sido creado");

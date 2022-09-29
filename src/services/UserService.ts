@@ -34,6 +34,12 @@ class UserService {
       throw new Error("Email ya registrado");
     }
 
+    const telefonoAlreadyExists = await usersRepository.findOne({ telefono });
+
+    if (telefonoAlreadyExists) {
+      throw new Error("telefono ya registrado");
+    }
+
     const user = usersRepository.create({ username, email, telefono, provincia, ciudad });
     console.log(user)
 
