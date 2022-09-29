@@ -32,62 +32,54 @@
       </div>
     </nav>
   <br>
-  <div class="row container centered" width="100vw ">
-    <div class="text-center">
-      <h2>Buscar por "<%= search %>"</h2>
+  <div class="row container centered" width="100vw">
+    <div class="text-center text-white">
+      <h2>Tabla de productos</h2>
     </div>
     <br>
     <br>
     <br>
-    <table class="table table-hover mt ">
+    <table class="table table-hover table-dark mt-100px">
       <thead>
-        <th scope="col">Usuario</th>
-        <th scope="col">Email</th>
-        <th scope="col">Teléfono</th>
-        <th scope="col">Ciudad</th>
-        <th scope="col">Provincia</th>
-        <th scope="col">Creado</th>
-        <th scope="col">Actualizado</th>
-        <th scope="col">Acciones</th>
+        <th scope="col">nombre</th>
+        <th scope="col">marca</th>
+        <th scope="col">precio</th>
+        <th scope="col">Creacion</th>
+        <th scope="col">Actualizacion</th>
+        <th scope="col">Acciones</th>          
       </thead>
       <tbody>
-        <% users.forEach(function(user) { %>
+        <% products.forEach(function(product) { %>
           <tr>
             <td>
-              <%= user.username %>
+              <%= product.nombre %>
             </td>
             <td>
-              <%= user.email %>
+              <%= product.marca %>
             </td>
             <td>
-              <%= user.telefono %>
+              <%= product.precio %>
             </td>
             <td>
-              <%= user.provincia %>
+              <%= product.created_at.toLocaleDateString() %>
+                <%= product.created_at.toLocaleTimeString() %>
             </td>
             <td>
-              <%= user.estado %>
-            </td>
-            <td>
-              <%= user.created_at.toLocaleDateString() %>
-                <%= user.created_at.toLocaleTimeString() %>
-            </td>
-            <td>
-              <%= user.updated_at.toLocaleDateString() %>
-                <%= user.updated_at.toLocaleTimeString() %>
+              <%= product.updated_at.toLocaleDateString() %>
+                <%= product.updated_at.toLocaleTimeString() %>
             </td>
             <td>
               <div class="row">
                 <div class="row">
-                  <form action="./edit" method="GET">
-                    <input type="hidden" name="id" value="<%= user.id %>">
+                  <form action="./editProduct" method="GET">
+                    <input type="hidden" name="id" value="<%= product.id %>">
                     <button type="submit" class="btn edit-btn"><i class="bi bi-pencil"></i></button>
                   </form>
                 </div>
                 <div class="row"></div>
                 <div class="row">
-                  <form action="./delete-user" method="POST">
-                    <input type="hidden" name="id" value="<%= user.id %>">
+                  <form action="./delete-product" method="POST">
+                    <input type="hidden" name="id" value="<%= product.id %>">
                     <button type="submit" class="btn delete-btn"><i class="bi bi-trash"></i></button>
                   </form>
                 </div>

@@ -49,7 +49,7 @@ class ProductController{
   
       const product = await getProductDataService.getData(id);
   
-      return response.render("products/edit", {
+      return response.render("products/editproduct", {
         product: product
       });
     }
@@ -70,7 +70,7 @@ class ProductController{
   
       try {
         const products = await searchProductService.search(search);
-        response.render("products/search", {
+        response.render("products/searchproduct", {
           products: products,
           search: search
         });
