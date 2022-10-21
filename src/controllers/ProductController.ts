@@ -25,8 +25,8 @@ class ProductController{
     }
 
     async handleAddProduct(request: Request, response:Response) {
-      const category = categoryService.list()
-      return response.render("products/addproduct", { category })
+      const categorias = await categoryService.list();
+      return response.render("products/addproduct", { categorias })
     }
 
     async handleDeleteProduct(request: Request, response: Response) {

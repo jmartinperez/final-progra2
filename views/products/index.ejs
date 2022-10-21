@@ -44,6 +44,7 @@
           <th scope="col">nombre</th>
           <th scope="col">marca</th>
           <th scope="col">precio</th>
+          <th scope="col">categoria</th>
           <th scope="col">Creacion</th>
           <th scope="col">Actualizacion</th>
           <th scope="col">Acciones</th>          
@@ -59,6 +60,9 @@
               </td>
               <td>
                 <%= product.precio %>
+              </td>
+              <td>
+                <%= product.id_category %>
               </td>
               <td>
                 <%= product.created_at.toLocaleDateString() %>
