@@ -17,9 +17,7 @@ productRouter.get("/home", (request, response) => {
 
 productRouter.get("/products",productController.handleListProducts);
 
-productRouter.get("/addProduct", (request, response) => {
-    response.render("products/addproduct");
-  });
+productRouter.get("/addProduct", productController.handleAddProduct);
 productRouter.post("/add-product", productController.handleCreateProduct);
 productRouter.get("/searchProduct", productController.handleSearchProduct);
 productRouter.get("/editProduct", productController.handleGetProductData)

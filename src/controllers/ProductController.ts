@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { categoryService } from "../services/CategoryService";
 import { ProductService } from "../services/ProductService"
 
 class ProductController{
@@ -13,17 +14,21 @@ class ProductController{
             marca,
             precio
           }).then(() => {
-            response.render("products/message", {
-              message: "Producto creado con éxito."
-            });
+            request.flash("succes", "producto creado exitosamente")
+            response.redirect("/products")
           });
         } catch (err) {
-          response.render("products/message", {
-            message: `Error al crear producto: ${err.message}`
-          });
+          request.flash("error", "Error al crear la categoria", err.toString());
+          response.redirect("/products");
         }
     
     }
+
+    async handleAddProduct(request: Request, response:Response) {
+      const category = categoryService.list()
+      return response.render("products/addproduct", { category })
+    }
+
     async handleDeleteProduct(request: Request, response: Response) {
         const { id } = request.body;
     
@@ -31,13 +36,12 @@ class ProductController{
     
         try {
           await deleteProductService.delete(id).then(() => {
-            response.render("products/message", {
-              message: "Producto creado con éxito."
-            });
+            request.flash("succes", "Producto eliminado exitosamente")
+            response.redirect("/products")
           });
         } catch (err) {
           response.render("products/message", {
-            message: `Error al crear producto: ${err.message}`
+            message: `Error al eliminar producto: ${err.message}`
           });
         }
     }
@@ -76,26 +80,25 @@ class ProductController{
         });
       } catch (err) {
         response.render("products/message", {
-          message: `Error al buscar producto: ${err.message}`
+          message: `Error al modificar producto: ${err.message}`
         });
       }
     }
     async handleUpdateProduct(request: Request, response: Response) {
-      const { nombre, marca, precio } = request.body;
+      const { id, nombre, marca, precio } = request.body;
   
       const updateProductService = new ProductService();
   
       try {
-        await updateProductService.update({ nombre, marca, precio }).then(() => {
-          response.render("products/message", {
-            message: "Producto creado con éxito."
+        await updateProductService.update({ id, nombre, marca, precio }).then(() => {
+          request.flash("succes", "Producto modificado exitosamente")
+            response.redirect("/products")
           });
-        });
-      } catch (err) {
-        response.render("products/message", {
-          message: `Error al crear producto: ${err.message}`
-        });
-      }
+        } catch (err) {
+          response.render("products/message", {
+            message: `Error al modificar producto: ${err.message}`
+          });
+        }
   
     }  
 }

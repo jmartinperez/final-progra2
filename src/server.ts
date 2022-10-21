@@ -4,13 +4,35 @@ import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import { productRouter } from "./routes";
 import { userRoutes } from "./routes/userRoutes";
+import { categoryRoutes } from "./routes/CategoryRoutes";
 import "./database";
+import session from "express-session";
+import flash from "connect-flash"
 
 const app = express();
+
+//Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(flash())
+
+//Variables Globales
+app.use((request, response, next) => {
+  app.locals.succes = request.flash("succes");
+  app.locals.error = request.flash("error");
+
+  next()
+});
+
+//Routes
 app.use(productRouter);
 app.use(userRoutes);
+app.use(categoryRoutes);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof Error) {
