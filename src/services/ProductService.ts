@@ -8,25 +8,26 @@ interface IProduct {
     nombre:string;
     marca:string;
     precio:number;
+    id_category: string;
   }
 
 
 class ProductService {
 
-  async create({ nombre, marca, precio }: IProduct) {
-    if (!nombre || !marca || !precio ) {
+  async create({ nombre, marca, precio, id_category }: IProduct) {
+    if (!nombre || !marca || !precio || !id_category ) {
       throw new Error("Por favor rellene todos los campos.");
     }
 
     const productsRepository = getCustomRepository(ProductsRepository);
 
-    const productnameAlreadyExists = await productsRepository.findOne({ nombre, marca, precio });
+    const productnameAlreadyExists = await productsRepository.findOne({ nombre });
 
     if (productnameAlreadyExists) {
       throw new Error("El producto ya ha sido creado");
     }
 
-    const product = productsRepository.create({ nombre, marca, precio });
+    const product = productsRepository.create({ nombre, marca, precio, id_category });
     console.log(product)
 
     await productsRepository.save(product);
@@ -60,7 +61,7 @@ class ProductService {
   async list() {
     const productsRepository = getCustomRepository(ProductsRepository);
 
-    const products = await productsRepository.find();
+    const products = await productsRepository.find({relations: ["category"]});
 
     return products;
   }
@@ -77,6 +78,7 @@ class ProductService {
       .where("nombre like :search", { search: `%${search}%` })
       .orWhere("marca like :search", { search: `%${search}%` })
       .orWhere("precio like :search", { search: `%${search}%` })
+      .orWhere("id_category like :search", { search: `%${search}%` })
       
       .getMany();
 
@@ -84,13 +86,13 @@ class ProductService {
 
   }
 
-  async update({ id,nombre, marca, precio }: IProduct) {
+  async update({ id,nombre, marca, precio, id_category }: IProduct) {
     const productsRepository = getCustomRepository(ProductsRepository);
 
     const product = await productsRepository
       .createQueryBuilder()
       .update(Products)
-      .set({ nombre, marca, precio })
+      .set({ nombre, marca, precio, id_category })
       .where("id = :id", { id })
       .execute();
 
