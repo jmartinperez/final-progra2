@@ -5,6 +5,7 @@ import path from "path";
 import { productRouter } from "./routes";
 import { userRoutes } from "./routes/userRoutes";
 import { categoryRoutes } from "./routes/CategoryRoutes";
+import { routerAuth } from "./routes/LoginRouters";
 import "./database";
 import session from "express-session";
 import flash from "connect-flash"
@@ -14,6 +15,7 @@ const app = express();
 //Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+require('./lib/passport')
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -33,6 +35,7 @@ app.use((request, response, next) => {
 app.use(productRouter);
 app.use(userRoutes);
 app.use(categoryRoutes);
+app.use(routerAuth);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof Error) {

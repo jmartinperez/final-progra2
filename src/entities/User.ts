@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 
+
 @Entity("users")
 class User {
 
@@ -8,7 +9,13 @@ class User {
   id: string;
 
   @Column()
+  name: string;
+
+  @Column()
   username: string;
+
+  @Column({nullable: false})
+  password: string;
 
   @Column()
   email: string;

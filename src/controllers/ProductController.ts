@@ -26,8 +26,8 @@ class ProductController{
     }
 
     async handleAddProduct(request: Request, response:Response) {
-      const categorias = await categoryService.list();
-      return response.render("products/addproduct", { categorias })
+      const category = await categoryService.list();
+      return response.render("products/addproduct", { category })
     }
 
     async handleDeleteProduct(request: Request, response: Response) {
@@ -41,9 +41,9 @@ class ProductController{
             response.redirect("/products")
           });
         } catch (err) {
-          response.render("products/message", {
-            message: `Error al eliminar producto: ${err.message}`
-          });
+          request.flash("error", "Error al crear el producto", err.toString());
+          response.redirect("/products");
+          
         }
     }
     async handleGetProductData(request: Request, response: Response) {
@@ -53,11 +53,11 @@ class ProductController{
       const getProductDataService = new ProductService();
   
       const product = await getProductDataService.getData(id);
-      const categoria = await categoryService.list()
+      const category = await categoryService.list()
   
       return response.render("products/editproduct", {
         product: product,
-        categoria: categoria
+        category: category
       });
     }
     async handleListProducts(request: Request, response: Response) {
@@ -84,9 +84,9 @@ class ProductController{
           search: search
         });
       } catch (err) {
-        response.render("products/message", {
-          message: `Error al modificar producto: ${err.message}`
-        });
+        request.flash("error", "Error al buscar el producto", err.toString());
+          response.redirect("/products");
+        
       }
     }
     async handleUpdateProduct(request: Request, response: Response) {
@@ -100,9 +100,9 @@ class ProductController{
             response.redirect("/products")
           });
         } catch (err) {
-          response.render("products/message", {
-            message: `Error al modificar producto: ${err.message}`
-          });
+          request.flash("error", "Error al actualiza el producto", err.toString());
+          response.redirect("/products");
+          
         }
   
     }  

@@ -1,5 +1,4 @@
 import { request, response, Router } from "express";
-import { UserController } from "./controllers/UserController";
 import { ProductController } from "./controllers/ProductController";
 
 
@@ -8,7 +7,7 @@ const productRouter = Router();
 const productController = new ProductController();
 
 productRouter.get("/", (request, response) => {
-  response.redirect("./home");
+  response.render("./login/signin");
 });
 
 productRouter.get("/home", (request, response) => {

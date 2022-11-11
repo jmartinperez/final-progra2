@@ -1,28 +1,32 @@
 import { Request, Response } from "express";
+import { helpers } from "../lib/helpers";
 import { UserService } from "../services/UserService"
 
 class UserController{
     async handleCreateUser(request: Request, response: Response) {
-        const { username, email, telefono, provincia, ciudad } = request.body;
+        const { name, email, telefono, provincia, ciudad, username, password } = request.body;
     
         const createUserService = new UserService();
     
         try {
           await createUserService.create({
-            username,
+            name,
             email,
             telefono,
             provincia,
-            ciudad
+            ciudad,
+            username,
+            password: await helpers.encryptPassword(password)
           }).then(() => {
-            response.render("user/message", {
-              message: "Usuario creado con éxito."
+            request.flash("succes", "Usuario creado exitosamente")
+            response.redirect("/users")
             });
-          });
+          
         } catch (err) {
-          response.render("user/message", {
-            message: `Error al crear usuario: ${err.message}`
-          });
+          request.flash("error", "Error al crear el usuario", err.toString());
+          console.log(request.body)
+          response.redirect("/users");
+          
         }
     
     }
@@ -33,14 +37,14 @@ class UserController{
     
         try {
           await deleteUserService.delete(id).then(() => {
-            response.render("user/message", {
-              message: "Usuario eliminado con éxito."
+            request.flash("succes", "Usuario eliminado exitosamente")
+            response.redirect("/users")
             });
-          });
+          
         } catch (err) {
-          response.render("user/message", {
-            message: `Error al crear usuario: ${err.message}`
-          });
+          request.flash("error", "Error al eliminar el usuario", err.toString());
+          response.redirect("/users");
+          
         }
     }
     async handleGetUserData(request: Request, response: Response) {
@@ -77,26 +81,34 @@ class UserController{
           search: search
         });
       } catch (err) {
-        response.render("user/message", {
-          message: `Error al buscar usuario: ${err.message}`
-        });
+        request.flash("error", "Error al crear el usuario", err.toString());
+          response.redirect("/users");
+        
       }
     }
     async handleUpdateUser(request: Request, response: Response) {
-      const { id, username, email, telefono, provincia, ciudad } = request.body;
+      const { id, name, email, telefono, provincia, ciudad, username, password } = request.body;
   
       const updateUserService = new UserService();
   
       try {
-        await updateUserService.update({ id, username, email, telefono, provincia, ciudad }).then(() => {
-          response.render("user/message", {
-            message: "Usuario creado con éxito."
-          });
+        await updateUserService.update({ 
+          id, 
+          name, 
+          email, 
+          telefono, 
+          provincia, 
+          ciudad, 
+          username, 
+          password:  await helpers.encryptPassword(password) 
+        }).then(() => {
+          request.flash("succes", "Usuario actualizado exitosamente")
+            response.redirect("/users")
+          
         });
       } catch (err) {
-        response.render("user/message", {
-          message: `Error al crear usuario: ${err.message}`
-        });
+        request.flash("error", "Error al crear el usuario", err.toString());
+          response.redirect("/users");
       }
   
     }  

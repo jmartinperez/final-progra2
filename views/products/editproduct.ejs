@@ -34,7 +34,7 @@
   <br>
   <div class="container">
     <div class="text-center">
-      <h2>Tabla de Productos
+      <h2>Editar producto
       </h2>
     </div>
     <br>
@@ -58,10 +58,9 @@
         </div>
         <div class="col-6">
           <label for="id_category" class="form-label">categoria</label>
-          <select name="id_category" id="id_category" class="form-select">
-            <option disabled selected>Seleccione una categoria</option>   
-            <% categorias.forEach(function(categoria) { %>
-              <option value="<%= categoria.id %>"> 
+          <select name="id_category" id="id_category" class="form-select" required>
+            <option value="<%= product.id_category %>" selected >
+            <% category.forEach(function(categoria) { %>
                 <%= categoria.nombre %> 
               </option>
             <% }) %>

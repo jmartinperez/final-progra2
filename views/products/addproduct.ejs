@@ -57,7 +57,7 @@
           <label for="id_category" class="form-label">categoria</label>
           <select name="id_category" id="id_category" class="form-select">
             <option disabled selected>Seleccione una categoria</option>   
-            <% categorias.forEach(function(categoria) { %>
+            <% category.forEach(function(categoria) { %>
               <option value="<%= categoria.id %>"> 
                 <%= categoria.nombre %> 
               </option>
