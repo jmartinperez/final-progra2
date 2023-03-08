@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, ManyToMany, JoinTable, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Categorias } from "./Category";
+import { Factura } from './Factura';
 
 @Entity("products")
 class Products {
@@ -24,6 +25,10 @@ class Products {
   @JoinColumn({ name: 'id_category' })
   category: Categorias
   
+  @ManyToMany(() => Factura)
+  @JoinTable()
+  facturas: Factura[];
+
   @CreateDateColumn()
   created_at: Date;
 

@@ -1,14 +1,26 @@
 
-
-
+* {
+  margin: 0;
+  padding: 0;
+}
 body {
   font-family: 'Open Sans', sans-serif;
-  max-width: 100vw!important;
-  max-height: 100vh!important;
-  background-color: #233346;
-  color: #ffffff;
+  /* max-width: 100vw!important;
+  max-height: 100vh!important; */
+  
+  background-image: url("../img/performance.jpg");
+  background-repeat: no-repeat;
+  background-size: 200rem;
+  animation: mov 30s infinite linear alternate;
 }
-
+@keyframes mov {
+  from {
+    background-position: top left;
+  }
+  to {
+    background-position: top right;
+}
+}
 .nav-icon {
   width: 50px;
 }
@@ -16,6 +28,8 @@ body {
 .primary-btn {
   background-color: #6cc24a;
   color: #fff;
+  border-radius: 1rem;
+  border-color: black;
 }
 
 .primary-btn:hover {
@@ -64,7 +78,7 @@ body {
   padding: 30px;
 }
 
-*
+
 /* {
   margin: 0;
   padding: 0;
@@ -80,7 +94,9 @@ body {
   min-height: 100vh;
   background: #1d061a
 } */
-
+.row{
+  color: #8cf700;
+}
 .container1
 {
   display: flex;
