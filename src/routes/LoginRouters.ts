@@ -22,9 +22,9 @@ routerAuth.post('/signin', (request, response, next) => {
 //salir de la sesión
 routerAuth.get('/logout', (request, response, next) =>{
 
-    request.logout((err: any) => next());
-    response.redirect('/signin');
-
+    request.session.destroy(function(error){
+      response.redirect('/signin');
+    });
   });
 
 

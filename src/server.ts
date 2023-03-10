@@ -9,25 +9,31 @@ import { routerAuth } from "./routes/LoginRouters";
 import "./database";
 import session from "express-session";
 import flash from "connect-flash"
+import passport from "passport";
+import morgan from "morgan";
 
 const app = express();
 
-//Middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-require('./lib/passport')
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
 }));
+
+//Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'))
+app.use(passport.initialize());
+app.use(passport.session());
+require('./lib/passport');
 app.use(flash())
 
 //Variables Globales
 app.use((request, response, next) => {
   app.locals.succes = request.flash("succes");
   app.locals.error = request.flash("error");
-
+  app.locals.user = request.user
   next()
 });
 

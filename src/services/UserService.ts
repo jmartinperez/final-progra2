@@ -121,3 +121,4 @@ class UserService {
 }
 
 export { UserService };
+export const userService = new UserService()

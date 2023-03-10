@@ -35,6 +35,41 @@ passport.use('local.signin', new LocalStrategy({
     }
 }));
 
+// Creacion de usuario
+
+passport.use('local.signup', new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
+    passReqToCallback: true
+}, async (request, username, password, done) => {
+
+    const { name, telefono, email, provincia, ciudad} = request.body;
+    const newUser = {
+        name,  
+        username,
+        password,
+        email,
+        telefono,
+        provincia,
+        ciudad
+}
+
+    newUser.password = await helpers.encryptPassword(password);
+
+    const userService = new UserService()
+    try {
+        await userService.create(newUser).then((result) => {
+            request.flash("success", 'Usuario creado con éxito');
+            return done(null, result);
+        });
+    } catch (err) {
+        request.flash(err.toString() )
+        request.flash("error", err.toString());
+        return done(null, null);
+    }
+
+}));
+
 passport.serializeUser((user: User, done) => {
  
     done(null, user.id);

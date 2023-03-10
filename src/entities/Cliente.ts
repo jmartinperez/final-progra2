@@ -10,6 +10,18 @@ class Cliente {
 
   @Column()
   name: string;
+  
+  @Column()
+  email: string;
+  
+  @Column()
+  telefono: string;
+  
+  @Column()
+  dni: string;
+  
+  @Column()
+  direccion: string;
 
   @OneToMany(() => Factura, factura => factura.cliente)
   facturas: Factura[];

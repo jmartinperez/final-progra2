@@ -8,13 +8,6 @@ class auth {
       return response.redirect('/signin');
   };
 
-  static isNotLoggedIn(request, response, next){
-      if (!request.isAuthenticated()) {
-          return next();
-      }
-      request.flash("error", "Sesion iniciada")
-      return response.redirect('/home')
-  };
 }
 
 export default auth;
