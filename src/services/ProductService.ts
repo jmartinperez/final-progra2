@@ -79,7 +79,6 @@ class ProductService {
       .orWhere("marca like :search", { search: `%${search}%` })
       .orWhere("precio like :search", { search: `%${search}%` })
       .orWhere("id_category like :search", { search: `%${search}%` })
-      
       .getMany();
 
     return product;

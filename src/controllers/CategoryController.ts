@@ -31,10 +31,9 @@ class CategoryController{
             response.redirect("/category")
           });
         } catch (err) {
-          response.render("products/message", {
-            message: `Error al eliminar categoria: ${err.message}`
-          });
-        }
+          request.flash("error", "Error al eliminar la categoria", err.toString());
+          response.redirect("/category");
+        };
     }
     async handleGetCategoryData(request: Request, response: Response) {
       let { id } = request.query;
@@ -70,10 +69,9 @@ class CategoryController{
           search: search
         });
       } catch (err) {
-        response.render("products/message", {
-          message: `Error al modificar categoria: ${err.message}`
-        });
-      }
+        request.flash("error", "Error al buscar la categoria", err.toString());
+          response.redirect("/category");
+      };
     }
     async handleUpdateCategory(request: Request, response: Response) {
       const { id, nombre } = request.body;
@@ -86,10 +84,9 @@ class CategoryController{
             response.redirect("/category")
           });
         } catch (err) {
-          response.render("products/message", {
-            message: `Error al modificar categoria: ${err.message}`
-          });
-        }
+          request.flash("error", "Error al actualizar la categoria", err.toString());
+          response.redirect("/category");
+        };
   
     }  
 }

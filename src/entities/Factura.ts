@@ -18,6 +18,9 @@ class Factura {
   @Column()
   fecha: Date;
 
+  @Column()
+  total: number;
+
   @ManyToOne(() => Cliente, cliente => cliente.facturas)
   @JoinColumn({ name: 'cliente_id'})
   cliente: Cliente;

@@ -11,7 +11,7 @@ body {
   background-image: url("../img/performance.jpg");
   background-repeat: no-repeat;
   background-size: 200rem;
-  animation: mov 30s infinite linear alternate;
+  animation: mov 120s infinite linear alternate; 
 }
 @keyframes mov {
   from {
@@ -67,7 +67,7 @@ body {
 
 .centered {
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -213,6 +213,7 @@ body {
   opacity: 1;
 }
 
+
 .container1 .box1 span::after
 {
   content:'';
@@ -230,7 +231,6 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.08);
   animation-delay: -1s;
 }
-
 .container1 .box1:hover span:after
 {
   bottom: -50px;
@@ -305,7 +305,7 @@ body {
   background: #ffcf4d;
   border: 1px solid rgba(255, 0, 88, 0.4);
   box-shadow: 0 1px 15px rgba(1, 1, 1, 0.2);
-}
+} 
 
 
 .my-custom-scrollbar {
@@ -315,7 +315,7 @@ body {
   }
   .table-wrapper-scroll-y {
   display: block;
-  }
+  } 
 
 /* #menu a {
   align-items: flex-end;

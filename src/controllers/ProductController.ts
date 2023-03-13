@@ -72,15 +72,17 @@ class ProductController{
     async handleSearchProduct(request: Request, response: Response) {
       let { search } = request.query;
       search = search.toString();
+
+      console.log(search)
   
       const searchProductService = new ProductService();
   
       try {
         const products = await searchProductService.search(search);
-        const categoria = await categoryService.list()
+        const category = await categoryService.list()
         response.render("products/searchproduct", {
           products: products,
-          categoria: categoria,
+          category: category,
           search: search
         });
       } catch (err) {
