@@ -8,13 +8,13 @@ const productRouter = Router();
 
 const productController = new ProductController();
 
-productRouter.get("/", (request, response) => {
+productRouter.get("/",auth.isLoggedIn, (request, response) => {
   response.render("./login/signin");
 });
 
-productRouter.get("/home",  (request, response) => {
+productRouter.get("/home", auth.isLoggedIn,(request, response) => {
   response.render("home")
- 
+
 })
 
 productRouter.get("/products", auth.isLoggedIn, productController.handleListProducts);
@@ -23,8 +23,8 @@ productRouter.get("/addProduct", auth.isLoggedIn, productController.handleAddPro
 productRouter.post("/add-product", productController.handleCreateProduct);
 productRouter.get("/searchProduct", auth.isLoggedIn, productController.handleSearchProduct);
 productRouter.get("/editProduct", auth.isLoggedIn, productController.handleGetProductData)
-productRouter.post("/edit-product", productController.handleUpdateProduct);
-productRouter.post("/delete-product", productController.handleDeleteProduct);
+productRouter.post("/edit-product", auth.isLoggedIn,productController.handleUpdateProduct);
+productRouter.post("/delete-product", auth.isLoggedIn,productController.handleDeleteProduct);
 
 export { productRouter };
 

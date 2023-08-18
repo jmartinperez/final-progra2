@@ -1,14 +1,15 @@
 import { Router } from "express";
 import { FacturaController } from "../controllers/FacturaController";
+import auth from "../lib/auth";
 
 const facturaRouter = Router();
 const facturaController = new FacturaController();
 
-facturaRouter.get("/facturas", facturaController.list);
-facturaRouter.get("/addFactura", facturaController.add)
-facturaRouter.post("/add-factura", facturaController.create);
-facturaRouter.get("/editfactura", facturaController.get);
-//facturaRouter.post("/edit-factura", facturaController.update);
-facturaRouter.post("/delete-factura", facturaController.delete);
+facturaRouter.get("/facturas",auth.isLoggedIn,  facturaController.list);
+facturaRouter.get("/addFactura",auth.isLoggedIn, facturaController.add)
+facturaRouter.post("/add-factura",auth.isLoggedIn, facturaController.create);
+facturaRouter.get("/editfactura",auth.isLoggedIn, facturaController.get);
+
+facturaRouter.post("/delete-factura",auth.isLoggedIn, facturaController.delete);
 
 export { facturaRouter };
