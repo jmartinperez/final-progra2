@@ -101,3 +101,4 @@ class ProductService {
 }
 
 export { ProductService };
+export const productService = new ProductService()

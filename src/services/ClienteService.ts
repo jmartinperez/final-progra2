@@ -33,7 +33,6 @@ interface ICliente {
       }
   
       const cliente = clientesRepository.create({ name, email, telefono, dni, direccion, });
-      console.log(cliente)
   
       await clientesRepository.save(cliente);
   
@@ -107,3 +106,4 @@ interface ICliente {
   }
   
   export { ClienteService };
+  export const clienteService = new ClienteService()

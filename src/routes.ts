@@ -12,10 +12,9 @@ productRouter.get("/", (request, response) => {
   response.render("./login/signin");
 });
 
-productRouter.get("/home", auth.isLoggedIn, (request, response) => {
+productRouter.get("/home",  (request, response) => {
   response.render("home")
-  console.log(request.isAuthenticated())
-  console.log(request.user)
+ 
 })
 
 productRouter.get("/products", auth.isLoggedIn, productController.handleListProducts);

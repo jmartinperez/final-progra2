@@ -76,7 +76,7 @@ class ClienteController{
     try {
       const clientes = await searchClienteService.search(search);
       response.render("cliente/search", {
-        cliente: clientes,
+        clientes: clientes,
         search: search
       });
     } catch (err) {

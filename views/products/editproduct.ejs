@@ -34,7 +34,7 @@
   <br>
   <div class="container">
     <div class="text-center">
-      <h2>Editar producto
+      <h2>Editar Producto
       </h2>
     </div>
     <br>
@@ -49,7 +49,7 @@
       <br>
       <div class="row">
         <div class="col-6">
-          <label for="marca" class="form-label">marca</label>
+          <label for="marca" class="form-label">Marca</label>
           <input type="text" name="marca" id="marca" class="form-control" value="<%= product.marca %>">
         </div>
         <div class="col-6">
@@ -57,10 +57,10 @@
           <input type="text" name="precio" id="precio" class="form-control" value="<%= product.precio %>">
         </div>
         <div class="col-6">
-          <label for="id_category" class="form-label">categoria</label>
-          <select name="id_category" id="id_category" class="form-select" required>
-            <option value="<%= product.id_category %>" selected >
+          <label for="id_category" class="form-label">Categoria</label>
+          <select name="id_category" id="id_category" value="<%= product.id_category %>" class="form-select">
             <% category.forEach(function(categoria) { %>
+              <option value="<%= categoria.id %>"> 
                 <%= categoria.nombre %> 
               </option>
             <% }) %>
@@ -72,7 +72,7 @@
       <div class="row">
         <div class="col-6">
           <div class="float-start">
-            <button type="submit" class="btn primary-btn">Actualizar datos</button>
+            <button type="submit" class="btn primary-btn">Actualizar Datos</button>
           </div>
         </div>
         <div class="col-6">
